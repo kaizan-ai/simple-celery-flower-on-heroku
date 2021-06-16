@@ -41,24 +41,30 @@ Flower needs to conenct to your Celery broker url in order to monitor your Celer
 ### On the Heroku Website:
 
 1. While in your application's dashboard, click on the settings tab.
-2. Click *reveal vars* button in the Config Vars section
+2. Click _reveal vars_ button in the Config Vars section
 3. Add a new key and value -- the key is `BROKER_URL` and the value is the url to your Celery broker for the application you want to monitor... if redis it would start with `redis://`
 
 ## Step 4 - Lock The Door! Add some Authentication
 
 The project assumes you want to keep things simple and use Basic Authentication. We simple need to add the username and password to the environment variables.
 
+We are using the Google authentication as described [here](https://flower.readthedocs.io/en/latest/auth.html#google-oauth-2-0).
+
 ### On the Command Line:
 
-`heroku config:set FLOWER_BASIC_AUTH="username:password" -a YOUR-APP_NAME`
+Once the Google credentials have been set up:
+
+`heroku config:set -a <app_name> FLOWER_OAUTH2_KEY=<key> FLOWER_OAUTH2_SECRET=<secret> FLOWER_OAUTH2_REDIRECT_URI=<redirect_url>`
 
 ### On the Heroku Website:
 
-1. Add a new key and value -- the key is `FLOWER_BASIC_AUTH` and the value is the username and password you want to use to login to Flower. `username:password`
+1. Add new keys and values -- the keys are `FLOWER_OAUTH2_KEY`,
+   `FLOWER_OAUTH2_SECRET` and `FLOWER_OAUTH2_REDIRECT_URI` and the values are the
+   ones from your new Google app.
 
 ## Step 5 - Deploy!
 
-It's time to deploy! 
+It's time to deploy!
 
 ### On the Command Line:
 
